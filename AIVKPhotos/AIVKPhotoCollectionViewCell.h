@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  AIVKPhotoCollectionViewCell.h
 //  AIVKPhotos
 //
 //  Created by Alexey Ivanov on 17.03.16.
@@ -8,8 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UITableViewController
-
+@interface AIVKPhotoCollectionViewCell : UICollectionViewCell
+@property (weak, nonatomic) IBOutlet UILabel *textLabel;
 
 @end
-

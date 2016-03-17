@@ -8,11 +8,16 @@
 
 #import "ViewController.h"
 #import "VKSdk.h"
+#import "AFTableViewCell.h"
+#import "AIVKPhotoCollectionViewCell.h"
+
+
 
 #define VK_APP_ID @"5360356"
 
-@interface ViewController () <VKSdkDelegate,VKSdkUIDelegate>
+@interface ViewController () <VKSdkDelegate,VKSdkUIDelegate,UICollectionViewDataSource,UICollectionViewDelegate>
 @property VKSdk * vksdk;
+@property NSMutableDictionary* albums;
 @end
 
 @implementation ViewController
@@ -20,6 +25,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    self.albums = [NSMutableDictionary new];
     
     self.vksdk = [VKSdk initializeWithAppId:VK_APP_ID];
     [self.vksdk registerDelegate:self];
@@ -47,6 +53,72 @@
     }];
 }
 
+- (IBAction)refreshButtonPressed:(id)sender
+{
+    [self.tableView reloadData];
+}
+
+#pragma mark - UITableViewDataSource
+#pragma mark - UITableViewDataSource Methods
+
+
+
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return self.albums.count;
+}
+
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *CellIdentifier = @"CellIdentifier";
+    
+    AFTableViewCell *cell = (AFTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    
+    if (!cell)
+    {
+        cell = [[AFTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+    }
+    
+    return cell;
+}
+
+-(void)tableView:(UITableView *)tableView willDisplayCell:(AFTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [cell setCollectionViewDataSourceDelegate:self indexPath:indexPath];
+//    NSInteger index = cell.collectionView.tag;
+    
+//    CGFloat horizontalOffset = [self.contentOffsetDictionary[[@(index) stringValue]] floatValue];
+//    [cell.collectionView setContentOffset:CGPointMake(horizontalOffset, 0)];
+}
+
+
+
+#pragma mark - UICollectionViewDataSource Methods
+
+-(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
+    NSString* key = self.albums.allKeys[[(AFIndexedCollectionView *)collectionView indexPath].row];
+    NSArray *collectionViewArray = self.albums[key];
+    return collectionViewArray.count;
+}
+
+-(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    AIVKPhotoCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CollectionViewCellIdentifier
+                                                                           forIndexPath:indexPath];
+    
+    NSString* key = self.albums.allKeys[[(AFIndexedCollectionView *)collectionView indexPath].row];
+    NSArray *collectionViewArray = self.albums[key];
+    
+    VKPhoto* photo = collectionViewArray[indexPath.row];
+    
+    cell.textLabel.text = photo.photo_130;
+    
+    return cell;
+}
+
+
+#pragma mark - VK api
 -(void)showPhotos
 {
     VKRequest* photoAlbumsRequest = [VKApi requestWithMethod:@"photos.getAlbums" andParameters:@{}];
@@ -68,11 +140,13 @@
                 [photosReq executeWithResultBlock:^(VKResponse *response) {
                     VKPhotoArray * photos = [[VKPhotoArray alloc] initWithDictionary:response.json];
                     NSLog(@"photos %@",photos);
+                    [self.albums setObject:photos forKey:album];
                 } errorBlock:^(NSError *error) {
                     
                 }];
             }
 
+            //TODO: dispatch group for one callback
         }
     } errorBlock:^(NSError *error) {
         

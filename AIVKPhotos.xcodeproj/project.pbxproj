@@ -14,6 +14,9 @@
 		33BE83EB1C9B2802002CCF60 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 33BE83EA1C9B2802002CCF60 /* Assets.xcassets */; };
 		33BE83EE1C9B2802002CCF60 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 33BE83EC1C9B2802002CCF60 /* LaunchScreen.storyboard */; };
 		33BE83F71C9B3A18002CCF60 /* AIVKPhotoAlbum.m in Sources */ = {isa = PBXBuildFile; fileRef = 33BE83F61C9B3A18002CCF60 /* AIVKPhotoAlbum.m */; };
+		33BE83FA1C9B439D002CCF60 /* AFTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 33BE83F91C9B439D002CCF60 /* AFTableViewCell.m */; };
+		33BE83FE1C9B488A002CCF60 /* AIVKPhotoCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 33BE83FC1C9B488A002CCF60 /* AIVKPhotoCollectionViewCell.m */; };
+		33BE83FF1C9B488A002CCF60 /* AIVKPhotoCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 33BE83FD1C9B488A002CCF60 /* AIVKPhotoCollectionViewCell.xib */; };
 		DAB4E46EA1C1098BDF0FA78C /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E339BA66A28288C10D2166F2 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -30,6 +33,11 @@
 		33BE83EF1C9B2802002CCF60 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		33BE83F51C9B3A18002CCF60 /* AIVKPhotoAlbum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIVKPhotoAlbum.h; sourceTree = "<group>"; };
 		33BE83F61C9B3A18002CCF60 /* AIVKPhotoAlbum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AIVKPhotoAlbum.m; sourceTree = "<group>"; };
+		33BE83F81C9B439D002CCF60 /* AFTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFTableViewCell.h; sourceTree = "<group>"; };
+		33BE83F91C9B439D002CCF60 /* AFTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFTableViewCell.m; sourceTree = "<group>"; };
+		33BE83FB1C9B488A002CCF60 /* AIVKPhotoCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIVKPhotoCollectionViewCell.h; sourceTree = "<group>"; };
+		33BE83FC1C9B488A002CCF60 /* AIVKPhotoCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AIVKPhotoCollectionViewCell.m; sourceTree = "<group>"; };
+		33BE83FD1C9B488A002CCF60 /* AIVKPhotoCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AIVKPhotoCollectionViewCell.xib; sourceTree = "<group>"; };
 		E339BA66A28288C10D2166F2 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6374A36519A64AC0CADEBD1 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		ED4CCAF214F03976661E9BB4 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -68,6 +76,8 @@
 		33BE83DD1C9B2802002CCF60 /* AIVKPhotos */ = {
 			isa = PBXGroup;
 			children = (
+				33BE83F81C9B439D002CCF60 /* AFTableViewCell.h */,
+				33BE83F91C9B439D002CCF60 /* AFTableViewCell.m */,
 				33BE83E11C9B2802002CCF60 /* AppDelegate.h */,
 				33BE83E21C9B2802002CCF60 /* AppDelegate.m */,
 				33BE83E41C9B2802002CCF60 /* ViewController.h */,
@@ -79,6 +89,9 @@
 				33BE83DE1C9B2802002CCF60 /* Supporting Files */,
 				33BE83F51C9B3A18002CCF60 /* AIVKPhotoAlbum.h */,
 				33BE83F61C9B3A18002CCF60 /* AIVKPhotoAlbum.m */,
+				33BE83FB1C9B488A002CCF60 /* AIVKPhotoCollectionViewCell.h */,
+				33BE83FC1C9B488A002CCF60 /* AIVKPhotoCollectionViewCell.m */,
+				33BE83FD1C9B488A002CCF60 /* AIVKPhotoCollectionViewCell.xib */,
 			);
 			path = AIVKPhotos;
 			sourceTree = "<group>";
@@ -168,6 +181,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				33BE83FF1C9B488A002CCF60 /* AIVKPhotoCollectionViewCell.xib in Resources */,
 				33BE83EE1C9B2802002CCF60 /* LaunchScreen.storyboard in Resources */,
 				33BE83EB1C9B2802002CCF60 /* Assets.xcassets in Resources */,
 				33BE83E91C9B2802002CCF60 /* Main.storyboard in Resources */,
@@ -229,9 +243,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				33BE83FA1C9B439D002CCF60 /* AFTableViewCell.m in Sources */,
 				33BE83E61C9B2802002CCF60 /* ViewController.m in Sources */,
 				33BE83F71C9B3A18002CCF60 /* AIVKPhotoAlbum.m in Sources */,
 				33BE83E31C9B2802002CCF60 /* AppDelegate.m in Sources */,
+				33BE83FE1C9B488A002CCF60 /* AIVKPhotoCollectionViewCell.m in Sources */,
 				33BE83E01C9B2802002CCF60 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
