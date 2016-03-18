@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface AIVKPhotoCollectionViewCell : UICollectionViewCell
-@property (weak, nonatomic) IBOutlet UILabel *textLabel;
+
+@property (weak, nonatomic) IBOutlet UIImageView *photoImageView;
 
 @end

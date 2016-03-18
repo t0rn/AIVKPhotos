@@ -10,7 +10,7 @@
 #import "VKSdk.h"
 #import "AFTableViewCell.h"
 #import "AIVKPhotoCollectionViewCell.h"
-
+#import "UIImageView+WebCache.h"
 
 
 #define VK_APP_ID @"5360356"
@@ -112,7 +112,11 @@
     
     VKPhoto* photo = collectionViewArray[indexPath.row];
     
-    cell.textLabel.text = photo.photo_130;
+    [cell.photoImageView sd_setImageWithURL:[NSURL URLWithString:photo.photo_130]
+                              completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+    
+                              }];
+    
     
     return cell;
 }
