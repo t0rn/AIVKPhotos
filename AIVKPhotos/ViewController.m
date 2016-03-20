@@ -26,6 +26,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.vksdk = [VKSdk initializeWithAppId:VK_APP_ID];
     [self.vksdk registerDelegate:self];
     self.vksdk.uiDelegate = self;
@@ -42,8 +43,11 @@
         }
         
         switch (state) {
-            case VKAuthorizationAuthorized:
-                [self showPhotos];
+            case VKAuthorizationAuthorized:{
+                [self getAlbumsAndPhotosWithCompletionBlock:^(NSError *error) {
+                    [self didLoadPhotoAlbums:error];
+                }];
+            }
                 break;
             case VKAuthorizationInitialized:
                 [VKSdk authorize:SCOPE withOptions:VKAuthorizationOptionsDisableSafariController];
@@ -96,7 +100,7 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [super tableView:tableView didSelectRowAtIndexPath:indexPath];
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 #pragma mark - UICollectionViewDataSource Methods
@@ -119,7 +123,7 @@
     
     VKPhoto* photo = album.photos[indexPath.row];
     
-    [cell.photoImageView sd_setImageWithURL:[NSURL URLWithString:photo.photo_130]
+    [cell.photoImageView sd_setImageWithURL:[NSURL URLWithString:photo.photo_604]
                               completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
     
                               }];
@@ -130,41 +134,67 @@
 
 
 #pragma mark - VK api
--(void)showPhotos
+
+-(void)getAlbumsAndPhotosWithCompletionBlock:(void(^)(NSError* error))completionBlock
 {
     VKRequest* photoAlbumsRequest = [VKApi requestWithMethod:@"photos.getAlbums" andParameters:@{}];
     
     [photoAlbumsRequest executeWithResultBlock:^(VKResponse *response) {
-        if ([response.json isKindOfClass:[NSDictionary class]]) {
-            self.photoAlbums = [[VKPhotoAlbums alloc] initWithDictionary:response.json];
-        
-            ///////////////// requestssss
-            for (VKPhotoAlbum* album in self.photoAlbums) {
-                NSLog(@"getting photos for album %@",album.id.stringValue);
-                NSNumber* ownerId = album.owner_id;
-                NSNumber* albumId = album.id;
-                VKRequest* photosReq = [[VKApi photos] prepareRequestWithMethodName:@"get" parameters:@{@"owner_id": ownerId,
-                                                                                                        @"album_id": albumId}];
+   
+        self.photoAlbums = [[VKPhotoAlbums alloc] initWithDictionary:response.json];
+    
+        dispatch_group_t photosInAlbumDispatchGroup = dispatch_group_create();
+
+        for (VKPhotoAlbum* album in self.photoAlbums) {
+            dispatch_group_enter(photosInAlbumDispatchGroup);
+            
+            NSNumber* ownerId = album.owner_id;
+            NSNumber* albumId = album.id;
+            VKRequest* photosReq = [[VKApi photos] prepareRequestWithMethodName:@"get" parameters:@{@"owner_id": ownerId,
+                                                                                                    @"album_id": albumId}];
+            
+            [photosReq executeWithResultBlock:^(VKResponse *response) {
+                VKPhotoArray * photos = [[VKPhotoArray alloc] initWithDictionary:response.json];
+                //add photos into photo album
+                album.photos = photos;
                 
-                [photosReq executeWithResultBlock:^(VKResponse *response) {
-                    VKPhotoArray * photos = [[VKPhotoArray alloc] initWithDictionary:response.json];
-                    NSLog(@"got photos for album %@",album.id.stringValue);
-                    album.photos = photos;
-                    
-
-                } errorBlock:^(NSError *error) {
-                    
-                }];
-            }
-
-            //TODO: dispatch group for one callback
+                dispatch_group_leave(photosInAlbumDispatchGroup);
+                
+            } errorBlock:^(NSError *error) {
+                NSLog(@"error to get photos in album %@",album.id.stringValue);
+                
+                dispatch_group_leave(photosInAlbumDispatchGroup);
+            }];
         }
-    } errorBlock:^(NSError *error) {
         
+        dispatch_group_notify(photosInAlbumDispatchGroup, dispatch_get_main_queue(),^{
+            if (completionBlock) {
+                completionBlock(nil);
+            }
+        });
+        
+    } errorBlock:^(NSError *error) {
+        if (completionBlock) {
+            completionBlock(error);
+        }
     }];
     
 
 }
+
+
+-(void)didLoadPhotoAlbums:(NSError*)error
+{
+    if (error) {
+        //show error HUD
+        return;
+    }
+    [self.tableView reloadData];
+}
+
+#pragma mark -
+
+
 
 #pragma mark -
 - (void)didReceiveMemoryWarning {
@@ -177,8 +207,11 @@
 -(void)vkSdkAccessAuthorizationFinishedWithResult:(VKAuthorizationResult *)result
 {
     switch (result.state) {
-        case VKAuthorizationAuthorized:
-            [self showPhotos];
+        case VKAuthorizationAuthorized:{
+            [self getAlbumsAndPhotosWithCompletionBlock:^(NSError *error) {
+                [self didLoadPhotoAlbums:error];
+            }];
+        }
             break;
             
         default:
