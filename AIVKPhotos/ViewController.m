@@ -8,7 +8,7 @@
 
 #import "ViewController.h"
 #import "VKSdk.h"
-#import "AFTableViewCell.h"
+#import "AITableViewCell.h"
 #import "AIVKPhotoCollectionViewCell.h"
 #import "UIImageView+WebCache.h"
 
@@ -33,6 +33,8 @@
 
     NSArray *SCOPE = @[@"photos"];
     
+//    [self.tableView registerClass:[AITableViewCell class] forCellReuseIdentifier:@"tableCellId"];
+    [self.tableView registerNib:[UINib nibWithNibName:@"AITableViewCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"tableCellId"];
     
     [VKSdk wakeUpSession:SCOPE completeBlock:^(VKAuthorizationState state, NSError *error) {
         if (error) {
@@ -70,19 +72,19 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"CellIdentifier";
+    static NSString *CellIdentifier = @"tableCellId";
     
-    AFTableViewCell *cell = (AFTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    AITableViewCell *cell = (AITableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     if (!cell)
     {
-        cell = [[AFTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        cell = [[AITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
     return cell;
 }
 
--(void)tableView:(UITableView *)tableView willDisplayCell:(AFTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+-(void)tableView:(UITableView *)tableView willDisplayCell:(AITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [cell setCollectionViewDataSourceDelegate:self indexPath:indexPath];
 //    NSInteger index = cell.collectionView.tag;
@@ -97,7 +99,7 @@
 
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    NSString* key = self.albums.allKeys[[(AFIndexedCollectionView *)collectionView indexPath].row];
+    NSString* key = self.albums.allKeys[[(AIIndexedCollectionView *)collectionView indexPath].row];
     NSArray *collectionViewArray = self.albums[key];
     return collectionViewArray.count;
 }
@@ -107,7 +109,7 @@
     AIVKPhotoCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CollectionViewCellIdentifier
                                                                            forIndexPath:indexPath];
     
-    NSString* key = self.albums.allKeys[[(AFIndexedCollectionView *)collectionView indexPath].row];
+    NSString* key = self.albums.allKeys[[(AIIndexedCollectionView *)collectionView indexPath].row];
     NSArray *collectionViewArray = self.albums[key];
     
     VKPhoto* photo = collectionViewArray[indexPath.row];

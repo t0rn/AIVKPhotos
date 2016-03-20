@@ -14,7 +14,6 @@
 		33BE83EB1C9B2802002CCF60 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 33BE83EA1C9B2802002CCF60 /* Assets.xcassets */; };
 		33BE83EE1C9B2802002CCF60 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 33BE83EC1C9B2802002CCF60 /* LaunchScreen.storyboard */; };
 		33BE83F71C9B3A18002CCF60 /* AIVKPhotoAlbum.m in Sources */ = {isa = PBXBuildFile; fileRef = 33BE83F61C9B3A18002CCF60 /* AIVKPhotoAlbum.m */; };
-		33BE83FA1C9B439D002CCF60 /* AFTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 33BE83F91C9B439D002CCF60 /* AFTableViewCell.m */; };
 		33BE83FE1C9B488A002CCF60 /* AIVKPhotoCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 33BE83FC1C9B488A002CCF60 /* AIVKPhotoCollectionViewCell.m */; };
 		33BE83FF1C9B488A002CCF60 /* AIVKPhotoCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 33BE83FD1C9B488A002CCF60 /* AIVKPhotoCollectionViewCell.xib */; };
 		33BE84221C9BE043002CCF60 /* MKAnnotationView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 33BE84021C9BE043002CCF60 /* MKAnnotationView+WebCache.m */; };
@@ -33,6 +32,8 @@
 		33BE842F1C9BE043002CCF60 /* UIImageView+HighlightedWebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 33BE841D1C9BE043002CCF60 /* UIImageView+HighlightedWebCache.m */; };
 		33BE84301C9BE043002CCF60 /* UIImageView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 33BE841F1C9BE043002CCF60 /* UIImageView+WebCache.m */; };
 		33BE84311C9BE043002CCF60 /* UIView+WebCacheOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 33BE84211C9BE043002CCF60 /* UIView+WebCacheOperation.m */; };
+		33BE84351C9E7C64002CCF60 /* AITableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 33BE84331C9E7C64002CCF60 /* AITableViewCell.m */; };
+		33BE84361C9E7C64002CCF60 /* AITableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 33BE84341C9E7C64002CCF60 /* AITableViewCell.xib */; };
 		DAB4E46EA1C1098BDF0FA78C /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E339BA66A28288C10D2166F2 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -49,8 +50,6 @@
 		33BE83EF1C9B2802002CCF60 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		33BE83F51C9B3A18002CCF60 /* AIVKPhotoAlbum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIVKPhotoAlbum.h; sourceTree = "<group>"; };
 		33BE83F61C9B3A18002CCF60 /* AIVKPhotoAlbum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AIVKPhotoAlbum.m; sourceTree = "<group>"; };
-		33BE83F81C9B439D002CCF60 /* AFTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFTableViewCell.h; sourceTree = "<group>"; };
-		33BE83F91C9B439D002CCF60 /* AFTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFTableViewCell.m; sourceTree = "<group>"; };
 		33BE83FB1C9B488A002CCF60 /* AIVKPhotoCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIVKPhotoCollectionViewCell.h; sourceTree = "<group>"; };
 		33BE83FC1C9B488A002CCF60 /* AIVKPhotoCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AIVKPhotoCollectionViewCell.m; sourceTree = "<group>"; };
 		33BE83FD1C9B488A002CCF60 /* AIVKPhotoCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AIVKPhotoCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -87,6 +86,9 @@
 		33BE841F1C9BE043002CCF60 /* UIImageView+WebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+WebCache.m"; sourceTree = "<group>"; };
 		33BE84201C9BE043002CCF60 /* UIView+WebCacheOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+WebCacheOperation.h"; sourceTree = "<group>"; };
 		33BE84211C9BE043002CCF60 /* UIView+WebCacheOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+WebCacheOperation.m"; sourceTree = "<group>"; };
+		33BE84321C9E7C64002CCF60 /* AITableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AITableViewCell.h; sourceTree = "<group>"; };
+		33BE84331C9E7C64002CCF60 /* AITableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AITableViewCell.m; sourceTree = "<group>"; };
+		33BE84341C9E7C64002CCF60 /* AITableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AITableViewCell.xib; sourceTree = "<group>"; };
 		E339BA66A28288C10D2166F2 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6374A36519A64AC0CADEBD1 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		ED4CCAF214F03976661E9BB4 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -126,8 +128,6 @@
 			isa = PBXGroup;
 			children = (
 				33BE84001C9BE043002CCF60 /* SDWebImage */,
-				33BE83F81C9B439D002CCF60 /* AFTableViewCell.h */,
-				33BE83F91C9B439D002CCF60 /* AFTableViewCell.m */,
 				33BE83E11C9B2802002CCF60 /* AppDelegate.h */,
 				33BE83E21C9B2802002CCF60 /* AppDelegate.m */,
 				33BE83E41C9B2802002CCF60 /* ViewController.h */,
@@ -142,6 +142,9 @@
 				33BE83FB1C9B488A002CCF60 /* AIVKPhotoCollectionViewCell.h */,
 				33BE83FC1C9B488A002CCF60 /* AIVKPhotoCollectionViewCell.m */,
 				33BE83FD1C9B488A002CCF60 /* AIVKPhotoCollectionViewCell.xib */,
+				33BE84321C9E7C64002CCF60 /* AITableViewCell.h */,
+				33BE84331C9E7C64002CCF60 /* AITableViewCell.m */,
+				33BE84341C9E7C64002CCF60 /* AITableViewCell.xib */,
 			);
 			path = AIVKPhotos;
 			sourceTree = "<group>";
@@ -274,6 +277,7 @@
 				33BE83FF1C9B488A002CCF60 /* AIVKPhotoCollectionViewCell.xib in Resources */,
 				33BE83EE1C9B2802002CCF60 /* LaunchScreen.storyboard in Resources */,
 				33BE83EB1C9B2802002CCF60 /* Assets.xcassets in Resources */,
+				33BE84361C9E7C64002CCF60 /* AITableViewCell.xib in Resources */,
 				33BE83E91C9B2802002CCF60 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -333,7 +337,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				33BE83FA1C9B439D002CCF60 /* AFTableViewCell.m in Sources */,
 				33BE84291C9BE043002CCF60 /* SDWebImageManager.m in Sources */,
 				33BE84241C9BE043002CCF60 /* SDImageCache.m in Sources */,
 				33BE84281C9BE043002CCF60 /* SDWebImageDownloaderOperation.m in Sources */,
@@ -343,6 +346,7 @@
 				33BE84231C9BE043002CCF60 /* NSData+ImageContentType.m in Sources */,
 				33BE842A1C9BE043002CCF60 /* SDWebImagePrefetcher.m in Sources */,
 				33BE84271C9BE043002CCF60 /* SDWebImageDownloader.m in Sources */,
+				33BE84351C9E7C64002CCF60 /* AITableViewCell.m in Sources */,
 				33BE83F71C9B3A18002CCF60 /* AIVKPhotoAlbum.m in Sources */,
 				33BE842E1C9BE043002CCF60 /* UIImage+WebP.m in Sources */,
 				33BE84301C9BE043002CCF60 /* UIImageView+WebCache.m in Sources */,
