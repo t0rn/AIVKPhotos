@@ -11,13 +11,13 @@
 #import "AITableViewCell.h"
 #import "AIVKPhotoCollectionViewCell.h"
 #import "UIImageView+WebCache.h"
-
+#import "VKPhotoAlbum.h"
 
 #define VK_APP_ID @"5360356"
 
 @interface ViewController () <VKSdkDelegate,VKSdkUIDelegate,UICollectionViewDataSource,UICollectionViewDelegate>
 @property VKSdk * vksdk;
-@property NSMutableDictionary* albums;
+@property (nonatomic,strong) VKPhotoAlbums* photoAlbums;
 @end
 
 @implementation ViewController
@@ -25,7 +25,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-    self.albums = [NSMutableDictionary new];
     
     self.vksdk = [VKSdk initializeWithAppId:VK_APP_ID];
     [self.vksdk registerDelegate:self];
@@ -64,10 +63,9 @@
 #pragma mark - UITableViewDataSource Methods
 
 
-
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.albums.count;
+    return self.photoAlbums.count;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -80,6 +78,9 @@
     {
         cell = [[AITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
+    VKPhotoAlbum* album = self.photoAlbums[indexPath.row];
+    cell.albumNameLabel.text = album.title;
+    cell.descriptionLabel.text = [NSString stringWithFormat:@"%ld photos",album.photos.count];
     
     return cell;
 }
@@ -93,15 +94,19 @@
 //    [cell.collectionView setContentOffset:CGPointMake(horizontalOffset, 0)];
 }
 
-
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [super tableView:tableView didSelectRowAtIndexPath:indexPath];
+}
 
 #pragma mark - UICollectionViewDataSource Methods
 
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    NSString* key = self.albums.allKeys[[(AIIndexedCollectionView *)collectionView indexPath].row];
-    NSArray *collectionViewArray = self.albums[key];
-    return collectionViewArray.count;
+    NSUInteger collectionViewIndex = [(AIIndexedCollectionView*)collectionView indexPath].row;
+    VKPhotoAlbum* album =[self.photoAlbums objectAtIndex:collectionViewIndex];
+
+    return album.photos.count;
 }
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -109,10 +114,10 @@
     AIVKPhotoCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CollectionViewCellIdentifier
                                                                            forIndexPath:indexPath];
     
-    NSString* key = self.albums.allKeys[[(AIIndexedCollectionView *)collectionView indexPath].row];
-    NSArray *collectionViewArray = self.albums[key];
+    NSUInteger collectionViewIndex = [(AIIndexedCollectionView*)collectionView indexPath].row;
+    VKPhotoAlbum* album =[self.photoAlbums objectAtIndex:collectionViewIndex];
     
-    VKPhoto* photo = collectionViewArray[indexPath.row];
+    VKPhoto* photo = album.photos[indexPath.row];
     
     [cell.photoImageView sd_setImageWithURL:[NSURL URLWithString:photo.photo_130]
                               completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
@@ -131,22 +136,22 @@
     
     [photoAlbumsRequest executeWithResultBlock:^(VKResponse *response) {
         if ([response.json isKindOfClass:[NSDictionary class]]) {
-            NSDictionary* jsonDict = (NSDictionary*)response.json;
-            NSArray* albums = jsonDict[@"items"];
-            if (albums == nil) {
-                return;
-            }
+            self.photoAlbums = [[VKPhotoAlbums alloc] initWithDictionary:response.json];
+        
             ///////////////// requestssss
-            for (NSDictionary* album in albums) {
-                NSString* ownerId = album[@"owner_id"];
-                NSString* albumId = album[@"id"];
+            for (VKPhotoAlbum* album in self.photoAlbums) {
+                NSLog(@"getting photos for album %@",album.id.stringValue);
+                NSNumber* ownerId = album.owner_id;
+                NSNumber* albumId = album.id;
                 VKRequest* photosReq = [[VKApi photos] prepareRequestWithMethodName:@"get" parameters:@{@"owner_id": ownerId,
-                                                                                                        @"album_id":albumId}];
+                                                                                                        @"album_id": albumId}];
                 
                 [photosReq executeWithResultBlock:^(VKResponse *response) {
                     VKPhotoArray * photos = [[VKPhotoArray alloc] initWithDictionary:response.json];
-                    NSLog(@"photos %@",photos);
-                    [self.albums setObject:photos forKey:album];
+                    NSLog(@"got photos for album %@",album.id.stringValue);
+                    album.photos = photos;
+                    
+
                 } errorBlock:^(NSError *error) {
                     
                 }];

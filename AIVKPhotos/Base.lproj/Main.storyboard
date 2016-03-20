@@ -43,6 +43,7 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" prompted="NO"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RgJ-At-krZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

@@ -34,6 +34,7 @@
 		33BE84311C9BE043002CCF60 /* UIView+WebCacheOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 33BE84211C9BE043002CCF60 /* UIView+WebCacheOperation.m */; };
 		33BE84351C9E7C64002CCF60 /* AITableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 33BE84331C9E7C64002CCF60 /* AITableViewCell.m */; };
 		33BE84361C9E7C64002CCF60 /* AITableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 33BE84341C9E7C64002CCF60 /* AITableViewCell.xib */; };
+		33BE843C1C9EC811002CCF60 /* VKPhotoAlbum.m in Sources */ = {isa = PBXBuildFile; fileRef = 33BE843B1C9EC811002CCF60 /* VKPhotoAlbum.m */; };
 		DAB4E46EA1C1098BDF0FA78C /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E339BA66A28288C10D2166F2 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -89,6 +90,8 @@
 		33BE84321C9E7C64002CCF60 /* AITableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AITableViewCell.h; sourceTree = "<group>"; };
 		33BE84331C9E7C64002CCF60 /* AITableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AITableViewCell.m; sourceTree = "<group>"; };
 		33BE84341C9E7C64002CCF60 /* AITableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AITableViewCell.xib; sourceTree = "<group>"; };
+		33BE843A1C9EC811002CCF60 /* VKPhotoAlbum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VKPhotoAlbum.h; sourceTree = "<group>"; };
+		33BE843B1C9EC811002CCF60 /* VKPhotoAlbum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VKPhotoAlbum.m; sourceTree = "<group>"; };
 		E339BA66A28288C10D2166F2 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6374A36519A64AC0CADEBD1 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		ED4CCAF214F03976661E9BB4 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -145,6 +148,8 @@
 				33BE84321C9E7C64002CCF60 /* AITableViewCell.h */,
 				33BE84331C9E7C64002CCF60 /* AITableViewCell.m */,
 				33BE84341C9E7C64002CCF60 /* AITableViewCell.xib */,
+				33BE843A1C9EC811002CCF60 /* VKPhotoAlbum.h */,
+				33BE843B1C9EC811002CCF60 /* VKPhotoAlbum.m */,
 			);
 			path = AIVKPhotos;
 			sourceTree = "<group>";
@@ -338,6 +343,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				33BE84291C9BE043002CCF60 /* SDWebImageManager.m in Sources */,
+				33BE843C1C9EC811002CCF60 /* VKPhotoAlbum.m in Sources */,
 				33BE84241C9BE043002CCF60 /* SDImageCache.m in Sources */,
 				33BE84281C9BE043002CCF60 /* SDWebImageDownloaderOperation.m in Sources */,
 				33BE84311C9BE043002CCF60 /* UIView+WebCacheOperation.m in Sources */,
