@@ -24,18 +24,22 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
     
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    //setup tableview
+    [self.tableView registerNib:[UINib nibWithNibName:@"AITableViewCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"tableCellId"];
+    [self createRefreshControl];
+    
+    //setup VK sdk and wake up session
+    [self prepareVKSdk];
+}
+
+-(void)prepareVKSdk
+{
     self.vksdk = [VKSdk initializeWithAppId:VK_APP_ID];
     [self.vksdk registerDelegate:self];
     self.vksdk.uiDelegate = self;
-
+    
     NSArray *SCOPE = @[@"photos"];
-    
-//    [self.tableView registerClass:[AITableViewCell class] forCellReuseIdentifier:@"tableCellId"];
-    [self.tableView registerNib:[UINib nibWithNibName:@"AITableViewCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"tableCellId"];
-    
     [VKSdk wakeUpSession:SCOPE completeBlock:^(VKAuthorizationState state, NSError *error) {
         if (error) {
             NSLog(@"error to wakeUpSession %@",error);
@@ -43,11 +47,8 @@
         }
         
         switch (state) {
-            case VKAuthorizationAuthorized:{
-                [self getAlbumsAndPhotosWithCompletionBlock:^(NSError *error) {
-                    [self didLoadPhotoAlbums:error];
-                }];
-            }
+            case VKAuthorizationAuthorized:
+                [self loadPhotos];
                 break;
             case VKAuthorizationInitialized:
                 [VKSdk authorize:SCOPE withOptions:VKAuthorizationOptionsDisableSafariController];
@@ -56,11 +57,6 @@
                 break;
         }
     }];
-}
-
-- (IBAction)refreshButtonPressed:(id)sender
-{
-    [self.tableView reloadData];
 }
 
 #pragma mark - UITableViewDataSource
@@ -192,9 +188,19 @@
     [self.tableView reloadData];
 }
 
-#pragma mark -
+#pragma mark - RefreshControl
 
+- (void)createRefreshControl {
+    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
+    [refreshControl addTarget:self action:@selector(loadPhotos) forControlEvents:UIControlEventValueChanged];
+    self.refreshControl = refreshControl;
+}
 
+-(void)loadPhotos{
+    [self getAlbumsAndPhotosWithCompletionBlock:^(NSError *error) {
+        [self didLoadPhotoAlbums:error];
+    }];
+}
 
 #pragma mark -
 - (void)didReceiveMemoryWarning {
@@ -207,20 +213,18 @@
 -(void)vkSdkAccessAuthorizationFinishedWithResult:(VKAuthorizationResult *)result
 {
     switch (result.state) {
-        case VKAuthorizationAuthorized:{
-            [self getAlbumsAndPhotosWithCompletionBlock:^(NSError *error) {
-                [self didLoadPhotoAlbums:error];
-            }];
-        }
+        case VKAuthorizationAuthorized:
+            [self loadPhotos];
             break;
             
         default:
             break;
     }
 }
+
 -(void)vkSdkUserAuthorizationFailed
 {
-    
+    NSLog(@"vkSdkUserAuthorizationFailed");
 }
 
 #pragma mark - VKSdkUIDelegate
