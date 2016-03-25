@@ -15,7 +15,7 @@
 
 #define VK_APP_ID @"5360356"
 
-@interface ViewController () <VKSdkDelegate,VKSdkUIDelegate,UICollectionViewDataSource,UICollectionViewDelegate>
+@interface ViewController () <VKSdkDelegate,VKSdkUIDelegate,UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout>
 @property VKSdk * vksdk;
 @property (nonatomic,strong) VKPhotoAlbums* photoAlbums;
 @end
@@ -129,7 +129,24 @@
 }
 
 
-#pragma mark - VK api
+#pragma mark - UICollectionViewDelegateFlowLayout
+/* TODO: 
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSUInteger collectionViewIndex = [(AIIndexedCollectionView*)collectionView indexPath].row;
+    VKPhotoAlbum* album =[self.photoAlbums objectAtIndex:collectionViewIndex];
+    VKPhoto* photo = album.photos[indexPath.row];
+    VKPhotoSize* photoSize = [photo.sizes photoSizeWithType:@"x"];
+    CGSize size = CGSizeMake(photoSize.width.floatValue, collectionView.contentSize.height);
+    
+    NSLog(@"photo size %@",NSStringFromCGSize(size));
+    return size;
+}
+*/
+
+
+#pragma mark - VK API
+
 
 -(void)getAlbumsAndPhotosWithCompletionBlock:(void(^)(NSError* error))completionBlock
 {
@@ -147,7 +164,9 @@
             NSNumber* ownerId = album.owner_id;
             NSNumber* albumId = album.id;
             VKRequest* photosReq = [[VKApi photos] prepareRequestWithMethodName:@"get" parameters:@{@"owner_id": ownerId,
-                                                                                                    @"album_id": albumId}];
+                                                                                                    @"album_id": albumId,
+                                                                                                    @"photo_sizes":@(1)
+                                                                                                    }];
             
             [photosReq executeWithResultBlock:^(VKResponse *response) {
                 VKPhotoArray * photos = [[VKPhotoArray alloc] initWithDictionary:response.json];
@@ -181,6 +200,7 @@
 
 -(void)didLoadPhotoAlbums:(NSError*)error
 {
+    [self.refreshControl endRefreshing];
     if (error) {
         //show error HUD
         return;
@@ -196,10 +216,20 @@
     self.refreshControl = refreshControl;
 }
 
--(void)loadPhotos{
+-(void)loadPhotos
+{
+    //TODO: add and show loading activity indicator
+    [self clearContent];
+    
     [self getAlbumsAndPhotosWithCompletionBlock:^(NSError *error) {
         [self didLoadPhotoAlbums:error];
     }];
+}
+
+-(void)clearContent
+{
+    self.photoAlbums = nil;
+    [self.tableView reloadData];
 }
 
 #pragma mark -
@@ -212,6 +242,7 @@
 
 -(void)vkSdkAccessAuthorizationFinishedWithResult:(VKAuthorizationResult *)result
 {
+    //TODO: check at first time when auth finished
     switch (result.state) {
         case VKAuthorizationAuthorized:
             [self loadPhotos];
