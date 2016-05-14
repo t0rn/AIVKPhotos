@@ -28,7 +28,7 @@
 }
 
 
-- (void)setCollectionViewDataSourceDelegate:(id<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout>)dataSourceDelegate
+- (void)setCollectionViewDataSourceDelegate:(id<UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>)dataSourceDelegate
                                  indexPath:(NSIndexPath *)indexPath
 {
     self.collectionView.dataSource = dataSourceDelegate;

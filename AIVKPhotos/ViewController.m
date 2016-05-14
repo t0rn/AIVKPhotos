@@ -130,19 +130,21 @@
 
 
 #pragma mark - UICollectionViewDelegateFlowLayout
-/* TODO: 
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+
+- (CGSize)collectionView:(UICollectionView *)collectionView
+                  layout:(UICollectionViewLayout*)collectionViewLayout
+  sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     NSUInteger collectionViewIndex = [(AIIndexedCollectionView*)collectionView indexPath].row;
     VKPhotoAlbum* album =[self.photoAlbums objectAtIndex:collectionViewIndex];
     VKPhoto* photo = album.photos[indexPath.row];
     VKPhotoSize* photoSize = [photo.sizes photoSizeWithType:@"x"];
-    CGSize size = CGSizeMake(photoSize.width.floatValue, collectionView.contentSize.height);
     
+    CGFloat scaleFactor = photoSize.height.floatValue / collectionView.contentSize.height;
+    CGSize size = CGSizeMake(photoSize.width.floatValue/scaleFactor, collectionView.contentSize.height);
     NSLog(@"photo size %@",NSStringFromCGSize(size));
     return size;
 }
-*/
 
 
 #pragma mark - VK API

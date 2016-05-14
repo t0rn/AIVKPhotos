@@ -237,7 +237,7 @@ static NSString *VK_ACCESS_TOKEN_DEFAULTS_KEY = @"VK_ACCESS_TOKEN_DEFAULTS_KEY_D
         VKMutableAuthorizationResult *res = [VKMutableAuthorizationResult new];
         res.error = error ? [NSError errorWithVkError:error] : nil;
         res.token = token;
-        res.state = vkSdkInstance.authState = VKAuthorizationPending;
+        res.state = vkSdkInstance.authState = error ? VKAuthorizationError : VKAuthorizationPending;
         if (token) {
             [instance requestSdkState:^(VKUser *visitor, NSInteger per, NSError *err) {
                 if (visitor) {
@@ -568,7 +568,7 @@ static NSString *VK_ACCESS_TOKEN_DEFAULTS_KEY = @"VK_ACCESS_TOKEN_DEFAULTS_KEY_D
 @end
 
 
-@implementation VKAccessToken (HttpsRequired)
+@implementation VKAccessToken (Private)
 
 - (void)setAccessTokenRequiredHTTPS {
     VKAccessTokenMutable *token = (VKAccessTokenMutable *) [[VKSdk accessToken] mutableCopy];
@@ -589,7 +589,7 @@ static NSString *VK_ACCESS_TOKEN_DEFAULTS_KEY = @"VK_ACCESS_TOKEN_DEFAULTS_KEY_D
     [[VKSdk instance].uiDelegate vkSdkNeedCaptchaEnter:self];
 }
 
-- (void)notiftAuthorizationFailed {
+- (void)notifyAuthorizationFailed {
     [[VKSdk instance] notifyUserAuthorizationFailed:self];
 }
 
