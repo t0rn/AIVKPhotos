@@ -118,8 +118,9 @@
     VKPhotoAlbum* album =[self.photoAlbums objectAtIndex:collectionViewIndex];
     
     VKPhoto* photo = album.photos[indexPath.row];
+    VKPhotoSize* photoSize = [photo.sizes photoSizeWithType:@"x"];
     
-    [cell.photoImageView sd_setImageWithURL:[NSURL URLWithString:photo.photo_604]
+    [cell.photoImageView sd_setImageWithURL:[NSURL URLWithString:photoSize.src]
                               completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
     
                               }];
@@ -139,7 +140,7 @@
     VKPhotoAlbum* album =[self.photoAlbums objectAtIndex:collectionViewIndex];
     VKPhoto* photo = album.photos[indexPath.row];
     VKPhotoSize* photoSize = [photo.sizes photoSizeWithType:@"x"];
-    
+
     CGFloat scaleFactor = photoSize.height.floatValue / collectionView.contentSize.height;
     CGSize size = CGSizeMake(photoSize.width.floatValue/scaleFactor, collectionView.contentSize.height);
     NSLog(@"photo size %@",NSStringFromCGSize(size));
