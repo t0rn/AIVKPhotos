@@ -140,9 +140,12 @@
     VKPhotoAlbum* album =[self.photoAlbums objectAtIndex:collectionViewIndex];
     VKPhoto* photo = album.photos[indexPath.row];
     VKPhotoSize* photoSize = [photo.sizes photoSizeWithType:@"x"];
-
+    //NOTE that we can have width/height == 0 and size with 0 devided to 0 will give exeption
+    if (photoSize.width.integerValue == 0) {
+        return CGSizeMake(collectionView.contentSize.height, collectionView.contentSize.height);
+    }
     CGFloat scaleFactor = photoSize.height.floatValue / collectionView.contentSize.height;
-    CGSize size = CGSizeMake(photoSize.width.floatValue/scaleFactor, collectionView.contentSize.height);
+    CGSize size = CGSizeMake(photoSize.width.floatValue /scaleFactor, collectionView.contentSize.height);
     NSLog(@"photo size %@",NSStringFromCGSize(size));
     return size;
 }
