@@ -146,7 +146,7 @@
     }
     CGFloat scaleFactor = photoSize.height.floatValue / collectionView.contentSize.height;
     CGSize size = CGSizeMake(photoSize.width.floatValue /scaleFactor, collectionView.contentSize.height);
-    NSLog(@"photo size %@",NSStringFromCGSize(size));
+   
     return size;
 }
 
