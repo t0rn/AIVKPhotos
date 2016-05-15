@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		33BE83E01C9B2802002CCF60 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 33BE83DF1C9B2802002CCF60 /* main.m */; };
 		33BE83E31C9B2802002CCF60 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 33BE83E21C9B2802002CCF60 /* AppDelegate.m */; };
-		33BE83E61C9B2802002CCF60 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33BE83E51C9B2802002CCF60 /* ViewController.m */; };
+		33BE83E61C9B2802002CCF60 /* AIVKPhotosViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33BE83E51C9B2802002CCF60 /* AIVKPhotosViewController.m */; };
 		33BE83E91C9B2802002CCF60 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 33BE83E71C9B2802002CCF60 /* Main.storyboard */; };
 		33BE83EB1C9B2802002CCF60 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 33BE83EA1C9B2802002CCF60 /* Assets.xcassets */; };
 		33BE83EE1C9B2802002CCF60 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 33BE83EC1C9B2802002CCF60 /* LaunchScreen.storyboard */; };
@@ -43,8 +43,8 @@
 		33BE83DF1C9B2802002CCF60 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		33BE83E11C9B2802002CCF60 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		33BE83E21C9B2802002CCF60 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		33BE83E41C9B2802002CCF60 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		33BE83E51C9B2802002CCF60 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		33BE83E41C9B2802002CCF60 /* AIVKPhotosViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AIVKPhotosViewController.h; sourceTree = "<group>"; };
+		33BE83E51C9B2802002CCF60 /* AIVKPhotosViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AIVKPhotosViewController.m; sourceTree = "<group>"; };
 		33BE83E81C9B2802002CCF60 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		33BE83EA1C9B2802002CCF60 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		33BE83ED1C9B2802002CCF60 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -133,8 +133,8 @@
 				33BE84001C9BE043002CCF60 /* SDWebImage */,
 				33BE83E11C9B2802002CCF60 /* AppDelegate.h */,
 				33BE83E21C9B2802002CCF60 /* AppDelegate.m */,
-				33BE83E41C9B2802002CCF60 /* ViewController.h */,
-				33BE83E51C9B2802002CCF60 /* ViewController.m */,
+				33BE83E41C9B2802002CCF60 /* AIVKPhotosViewController.h */,
+				33BE83E51C9B2802002CCF60 /* AIVKPhotosViewController.m */,
 				33BE83E71C9B2802002CCF60 /* Main.storyboard */,
 				33BE83EA1C9B2802002CCF60 /* Assets.xcassets */,
 				33BE83EC1C9B2802002CCF60 /* LaunchScreen.storyboard */,
@@ -347,7 +347,7 @@
 				33BE84241C9BE043002CCF60 /* SDImageCache.m in Sources */,
 				33BE84281C9BE043002CCF60 /* SDWebImageDownloaderOperation.m in Sources */,
 				33BE84311C9BE043002CCF60 /* UIView+WebCacheOperation.m in Sources */,
-				33BE83E61C9B2802002CCF60 /* ViewController.m in Sources */,
+				33BE83E61C9B2802002CCF60 /* AIVKPhotosViewController.m in Sources */,
 				33BE842B1C9BE043002CCF60 /* UIButton+WebCache.m in Sources */,
 				33BE84231C9BE043002CCF60 /* NSData+ImageContentType.m in Sources */,
 				33BE842A1C9BE043002CCF60 /* SDWebImagePrefetcher.m in Sources */,

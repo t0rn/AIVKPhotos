@@ -6,7 +6,7 @@
 //  Copyright © 2016 Alexey Ivanov. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "AIVKPhotosViewController.h"
 #import "VKSdk.h"
 #import "AITableViewCell.h"
 #import "AIVKPhotoCollectionViewCell.h"
@@ -15,12 +15,12 @@
 
 #define VK_APP_ID @"5360356"
 
-@interface ViewController () <VKSdkDelegate,VKSdkUIDelegate,UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout>
+@interface AIVKPhotosViewController () <VKSdkDelegate,VKSdkUIDelegate,UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout>
 @property VKSdk * vksdk;
 @property (nonatomic,strong) VKPhotoAlbums* photoAlbums;
 @end
 
-@implementation ViewController
+@implementation AIVKPhotosViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
