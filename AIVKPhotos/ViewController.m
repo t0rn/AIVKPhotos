@@ -115,9 +115,9 @@
                                                                            forIndexPath:indexPath];
     
     NSUInteger collectionViewIndex = [(AIIndexedCollectionView*)collectionView indexPath].row;
-    VKPhotoAlbum* album =[self.photoAlbums objectAtIndex:collectionViewIndex];
     
-    VKPhoto* photo = album.photos[indexPath.row];
+    VKPhotoAlbum* album = [self photoAlbumAtIndex:collectionViewIndex];
+    VKPhoto* photo = [self photoFromAlbum:album atIndex:indexPath.row];
     VKPhotoSize* photoSize = [photo.sizes photoSizeWithType:@"x"];
     
     [cell.photoImageView sd_setImageWithURL:[NSURL URLWithString:photoSize.src]
@@ -129,6 +129,17 @@
     return cell;
 }
 
+#pragma mark - UICollectionView Delegate
+
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(nonnull NSIndexPath *)indexPath
+{
+    NSUInteger collectionViewIndex = [(AIIndexedCollectionView*)collectionView indexPath].row;
+    VKPhotoAlbum* album = [self photoAlbumAtIndex:collectionViewIndex];
+    VKPhoto* photo = [self photoFromAlbum:album atIndex:indexPath.row];
+    VKPhotoSize* photoSize = [photo.sizes photoSizeWithType:@"x"];
+    NSLog(@"did select photo %@ with url %@",photo,photoSize.src);
+    [collectionView deselectItemAtIndexPath:indexPath animated:YES];
+}
 
 #pragma mark - UICollectionViewDelegateFlowLayout
 
@@ -150,6 +161,25 @@
     return size;
 }
 
+#pragma mark - Accessors
+
+-(VKPhotoAlbum*)photoAlbumAtIndex:(NSUInteger)index
+{
+    if (index == NSNotFound || index >= self.photoAlbums.count) {
+        return nil;
+    }
+    VKPhotoAlbum*album = [self.photoAlbums objectAtIndex:index];
+    return album;
+}
+
+-(VKPhoto*)photoFromAlbum:(VKPhotoAlbum*)album atIndex:(NSUInteger)index
+{
+    if (index == NSNotFound || index >= album.photos.count) {
+        return nil;
+    }
+    
+    return [album.photos objectAtIndex:index];;
+}
 
 #pragma mark - VK API
 
